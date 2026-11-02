@@ -1,16 +1,64 @@
 from db_connector import SwoleSociety
+import mysql.connector
 
 def main():
     try:
-        db = SwoleSociety()
+        conn = mysql.connector.connect(
+            host='localhost',
+            user='root',
+            password='',
+            database='swoleSociety'
+        )
+        cursor = conn.cursor()
 
-        members = db.getAllMembers()
-        print(members, "TEST")
-    except:
-        db.close()
+        q = SwoleSociety(cursor, conn)
+
+        classes = q.getAllClassTypes()
+        print("All ClassTypes: ")
+        print(cursor.column_names)
+        for c in classes:
+            print(c)
+        
+        classes = q.getAllMembershipTypes()
+        print("All MembershipTypes: ")
+        print(cursor.column_names)
+        for c in classes:
+            print(c)
+        
+        members = q.getAllMembers()
+        print("All members in the database with MembershipType: ")
+        print(cursor.column_names)
+        for m in members:
+            print(m)
+
+        coaches = q.getAllCoaches()
+        print("All coaches in the database: ")
+        print(cursor.column_names)
+        for c in coaches:
+            print(c)
+        
+        classes = q.getAllClasses()
+        print("All Classes in the database with ClassType and Coach: ")
+        print(cursor.column_names)
+        for c in classes:
+            print(c)
+        
+        classEnrollments = q.getAllClassEnrollments()
+        print("All ClassEnrollments: ")
+        print(cursor.column_names)
+        for c in classEnrollments:
+            print(c)
+        
+
+
+    except Exception as e:
+        print(e)
+        cursor.close()
+        conn.close()
+
     finally: 
-        if db is not None:
-            db.close()
-
+        if cursor is not None:
+            cursor.close()
+            conn.close()
 if __name__ == "__main__":
     main()

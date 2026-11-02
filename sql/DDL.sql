@@ -7,106 +7,106 @@ SET FOREIGN_KEY_CHECKS=0;
 SET AUTOCOMMIT = 0;
 
 --
--- Table structure for table `MembershipTypes`
+-- Table structure for table MembershipTypes
 --
 
-DROP TABLE IF EXISTS `MembershipTypes`;
-CREATE TABLE `MembershipTypes` (
-  `membership_type_id` int NOT NULL AUTO_INCREMENT,
-  `membership_name` varchar(50) NOT NULL,
-  `attendance_limit` int NOT NULL COMMENT '-1 is unlimited',
-  PRIMARY KEY (`membership_type_id`),
-  UNIQUE KEY `membership_name_UNIQUE` (`membership_name`)
+DROP TABLE IF EXISTS MembershipTypes;
+CREATE TABLE MembershipTypes (
+  membership_type_id int NOT NULL AUTO_INCREMENT,
+  membership_name varchar(50) NOT NULL,
+  attendance_limit int NOT NULL COMMENT '-1 is unlimited',
+  PRIMARY KEY (membership_type_id),
+  UNIQUE KEY membership_name_UNIQUE (membership_name)
 );
 
 --
--- Table structure for table `Members`
+-- Table structure for table Members
 --
 
-DROP TABLE IF EXISTS `Members`;
-CREATE TABLE `Members` (
-  `member_id` int NOT NULL AUTO_INCREMENT,
-  `member_email` varchar(100) NOT NULL,
-  `member_first_name` varchar(45) NOT NULL,
-  `member_last_name` varchar(45) NOT NULL,
-  `membership_start_date` date NOT NULL,
-  `membership_end_date` date DEFAULT NULL,
-  `member_street` varchar(50) DEFAULT NULL,
-  `member_city` varchar(50) DEFAULT NULL,
-  `member_state` varchar(50) DEFAULT NULL,
-  `member_zip` char(5) DEFAULT NULL,
-  `member_phone` varchar(10) NOT NULL,
-  `membership_type_id` int NOT NULL,
-  PRIMARY KEY (`member_id`),
-  UNIQUE KEY `email_UNIQUE` (`member_email`),
-  KEY `fk_Members_MembershipTypes1_idx` (`membership_type_id`),
-  CONSTRAINT `fk_Members_MembershipTypes1` FOREIGN KEY (`membership_type_id`) REFERENCES `MembershipTypes` (`membership_type_id`)
+DROP TABLE IF EXISTS Members;
+CREATE TABLE Members (
+  member_id int NOT NULL AUTO_INCREMENT,
+  member_email varchar(100) NOT NULL,
+  member_first_name varchar(45) NOT NULL,
+  member_last_name varchar(45) NOT NULL,
+  membership_start_date date NOT NULL,
+  membership_end_date date DEFAULT NULL,
+  member_street varchar(50) DEFAULT NULL,
+  member_city varchar(50) DEFAULT NULL,
+  member_state varchar(50) DEFAULT NULL,
+  member_zip char(5) DEFAULT NULL,
+  member_phone varchar(10) NOT NULL,
+  membership_type_id int NOT NULL,
+  PRIMARY KEY (member_id),
+  UNIQUE KEY email_UNIQUE (member_email),
+  KEY fk_Members_MembershipTypes1_idx (membership_type_id),
+  CONSTRAINT fk_Members_MembershipTypes1 FOREIGN KEY (membership_type_id) REFERENCES MembershipTypes (membership_type_id)
   ON DELETE CASCADE
 );
 
 --
--- Table structure for table `Coaches`
+-- Table structure for table Coaches
 --
 
-DROP TABLE IF EXISTS `Coaches`;
-CREATE TABLE `Coaches` (
-  `coach_id` int NOT NULL AUTO_INCREMENT,
-  `member_id` int NOT NULL,
-  PRIMARY KEY (`coach_id`),
-  KEY `fk_Coaches_Members1_idx` (`member_id`),
-  CONSTRAINT `fk_Coaches_Members1` FOREIGN KEY (`member_id`) REFERENCES `Members` (`member_id`)
+DROP TABLE IF EXISTS Coaches;
+CREATE TABLE Coaches (
+  coach_id int NOT NULL AUTO_INCREMENT,
+  member_id int NOT NULL,
+  PRIMARY KEY (coach_id),
+  KEY fk_Coaches_Members1_idx (member_id),
+  CONSTRAINT fk_Coaches_Members1 FOREIGN KEY (member_id) REFERENCES Members (member_id)
   ON DELETE CASCADE
 );
 
 --
--- Table structure for table `ClassTypes`
+-- Table structure for table ClassTypes
 --
 
-DROP TABLE IF EXISTS `ClassTypes`;
-CREATE TABLE `ClassTypes` (
-  `class_type_id` int NOT NULL AUTO_INCREMENT,
-  `class_type_name` varchar(50) NOT NULL,
-  PRIMARY KEY (`class_type_id`)
+DROP TABLE IF EXISTS ClassTypes;
+CREATE TABLE ClassTypes (
+  class_type_id int NOT NULL AUTO_INCREMENT,
+  class_type_name varchar(50) NOT NULL,
+  PRIMARY KEY (class_type_id)
 );
 
 --
--- Table structure for table `Classes`
+-- Table structure for table Classes
 --
 
-DROP TABLE IF EXISTS `Classes`;
-CREATE TABLE `Classes` (
-  `class_id` int NOT NULL AUTO_INCREMENT,
-  `class_name` varchar(100) NOT NULL,
-  `class_duration_min` int NOT NULL,
-  `class_max_capacity` int NOT NULL,
-  `class_date_time` DATETIME NOT NULL,
-  `class_type_id` int NOT NULL,
-  `coach_id` int NOT NULL,
-  PRIMARY KEY (`class_id`),
-  KEY `fk_Programs_Coaches1_idx` (`coach_id`),
-  KEY `fk_Programs_ProgramType1_idx` (`class_type_id`),
-  CONSTRAINT `fk_Programs_Coaches1` FOREIGN KEY (`coach_id`) REFERENCES `Coaches` (`coach_id`)
+DROP TABLE IF EXISTS Classes;
+CREATE TABLE Classes (
+  class_id int NOT NULL AUTO_INCREMENT,
+  class_name varchar(100) NOT NULL,
+  class_duration_min int NOT NULL,
+  class_max_capacity int NOT NULL,
+  class_date_time DATETIME NOT NULL,
+  class_type_id int NOT NULL,
+  coach_id int NOT NULL,
+  PRIMARY KEY (class_id),
+  KEY fk_Programs_Coaches1_idx (coach_id),
+  KEY fk_Programs_ProgramType1_idx (class_type_id),
+  CONSTRAINT fk_Programs_Coaches1 FOREIGN KEY (coach_id) REFERENCES Coaches (coach_id)
   ON DELETE CASCADE,
-  CONSTRAINT `fk_Programs_ProgramType1` FOREIGN KEY (`class_type_id`) REFERENCES `ClassTypes` (`class_type_id`)
+  CONSTRAINT fk_Programs_ProgramType1 FOREIGN KEY (class_type_id) REFERENCES ClassTypes (class_type_id)
   ON DELETE CASCADE
 );
 
 --
--- Table structure for table `ClassEnrollments`
+-- Table structure for table ClassEnrollments
 --
 
-DROP TABLE IF EXISTS `ClassEnrollments`;
-CREATE TABLE `ClassEnrollments` (
-  `class_enrollment_id` int NOT NULL AUTO_INCREMENT,
-  `class_id` int NOT NULL,
-  `member_id` int NOT NULL,
-  PRIMARY KEY (`class_enrollment_id`),
-  UNIQUE KEY `classID_memberID_UNIQUE` (`class_id`, `member_id`),
-  KEY `fk_Members_has_Programs_Programs1_idx` (`class_id`),
-  KEY `fk_Members_has_Programs_Members1_idx` (`member_id`),
-  CONSTRAINT `fk_Members_has_Programs_Members1` FOREIGN KEY (`member_id`) REFERENCES `Members` (`member_id`)
+DROP TABLE IF EXISTS ClassEnrollments;
+CREATE TABLE ClassEnrollments (
+  class_enrollment_id int NOT NULL AUTO_INCREMENT,
+  class_id int NOT NULL,
+  member_id int NOT NULL,
+  PRIMARY KEY (class_enrollment_id),
+  UNIQUE KEY classID_memberID_UNIQUE (class_id, member_id),
+  KEY fk_Members_has_Programs_Programs1_idx (class_id),
+  KEY fk_Members_has_Programs_Members1_idx (member_id),
+  CONSTRAINT fk_Members_has_Programs_Members1 FOREIGN KEY (member_id) REFERENCES Members (member_id)
   ON DELETE CASCADE,
-  CONSTRAINT `fk_Members_has_Programs_Programs1` FOREIGN KEY (`class_id`) REFERENCES `Classes` (`class_id`)
+  CONSTRAINT fk_Members_has_Programs_Programs1 FOREIGN KEY (class_id) REFERENCES Classes (class_id)
   ON DELETE CASCADE
 );
 
@@ -249,5 +249,3 @@ VALUES
 
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
-
--- Reworked from MySql Workbench Dump
