@@ -81,35 +81,52 @@ class SwoleSociety:
         SELECT Classes.class_name, Members.member_first_name from ClassEnrollments
         INNER JOIN Members on Members.member_id = ClassEnrollments.member_id
         INNER JOIN Classes on Classes.class_id = ClassEnrollments.class_id
+        ORDER BY Classes.class_name, Members.member_first_name
         """
         self.cursor.execute(sql)
         results = self.cursor.fetchall()
         return results
 
-    # TODO CUD for ClassEnrollments
-    # def addClassEnrollment(self, args):
-    #     cursor = self.cursor(dictionary=True)
-    #     sql = """
-    #     """
-    #     cursor.execute(sql, (args))
-    #     self.conn.commit()
-    #     rowcount = cursor.rowcount
-    #     return rowcount
+ 
+    def addClassEnrollment(self, class_id, member_id):
+        """
+        Add ClassEnrollment
+        """
+        sql = """
+        INSERT INTO ClassEnrollments (class_id, member_id)
+        VALUES (%s, %s)
+        """
+        self.cursor.execute(sql, (class_id, member_id))
+        self.connection.commit()
+        rowcount = self.cursor.rowcount
+        return rowcount
 
-    #  def updateClassEnrollment(self, args):
-    #     cursor = self.cursor(dictionary=True)
-    #     sql = """
-    #     """
-    #     cursor.execute(sql, (args))
-    #     self.conn.commit()
-    #     rowcount = cursor.rowcount
-    #     return rowcount
+    def updateClassEnrollment(self, class_id, old_class_id, member_id):
+        """
+        Update ClassEnrollment with new class_id
+        """
+        sql = """
+        UPDATE ClassEnrollments 
+        SET class_id = %s
+        WHERE class_id = %s
+        AND member_id = %s
+        """
+        self.cursor.execute(sql, (class_id, old_class_id, member_id))
+        self.connection.commit()
+        rowcount = self.cursor.rowcount
+        return rowcount
 
-    #  def deleteClassEnrollment(self, enrollmentId):
-    #     cursor = self.cursor(dictionary=True)
-    #     sql = "DELETE FROM bsg_people WHERE id=%s"
-    #     cursor.execute(sql, (enrollmentId))
-    #     self.conn.commit()
-    #     rowcount = cursor.rowcount
-    #     return rowcount
+    def deleteClassEnrollment(self, class_id, member_id):
+        """
+        Delete class Enrollment by member and class id
+        """
+        sql = """
+        DELETE FROM classEnrollments WHERE 
+        class_id=%s
+        AND member_id = %s
+        """
+        self.cursor.execute(sql, (class_id, member_id))
+        self.connection.commit()
+        rowcount = self.cursor.rowcount
+        return rowcount
 

@@ -175,6 +175,18 @@ VALUES
     '94201',
     '5555555555',
     1
+),
+(
+    'ralph@abc.com',
+    'Ralph',
+    'Waldo',
+    '2001-01-01',
+    'Oak Street',
+    'San Francisco',
+    'CA',
+    '94201',
+    '6555555555',
+    1
 );
 
 
@@ -244,8 +256,11 @@ VALUES
 ),
 (
   3,
-  2
+  3
 );
 
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
+
+
+-- Reworked from Mysql Dump

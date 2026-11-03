@@ -1,3 +1,5 @@
+-- Variables prefixed with : and postfixed with input are values from the Python application.
+
 --  Gets all Members from database with MembershipType 
 SELECT member_id, member_first_name, member_last_name, membership_name from Members
     INNER JOIN MembershipTypes on MembershipTypes.membership_type_id = Members.membership_type_id
@@ -25,3 +27,18 @@ SELECT class_id, class_name, class_type_name, member_first_name as coach_name, c
         INNER JOIN Coaches on Coaches.coach_id = Classes.coach_id
         INNER JOIN Members on Members.member_id = Coaches.member_id
         INNER JOIN ClassTypes on ClassTypes.class_type_id = Classes.class_type_id
+
+-- Adds ClassEnrollment
+INSERT INTO ClassEnrollments (class_id, member_id)
+        VALUES (:class_id_input, :member_id_input)
+
+-- Updates ClassEnrollment class_id taking in class_id and old_class_id and member_id
+UPDATE ClassEnrollments 
+        SET class_id = :class_id_input
+        WHERE class_id = :old_class_id_input
+        AND member_id = :member_id_input
+
+-- Deletes ClassEnrollment for member_id and class_id
+DELETE FROM classEnrollments WHERE 
+        class_id = :class_id_input
+        AND member_id = :member_id_input

@@ -49,6 +49,35 @@ def main():
         for c in classEnrollments:
             print(c)
         
+        results = q.addClassEnrollment(1, 4)
+        print("Adding Class Enrollment")
+        print("Rows Inserted: ", results)
+
+        classEnrollments = q.getAllClassEnrollments()
+        print("Updated ClassEnrollments: ")
+        print(cursor.column_names)
+        for c in classEnrollments:
+            print(c)
+        
+        results = q.updateClassEnrollment(2, 1, 4)
+        print("Updating Class Enrollment class_id")
+        print("Rows Updated: ", results)
+
+        classEnrollments = q.getAllClassEnrollments()
+        print("Updated ClassEnrollments: ")
+        print(cursor.column_names)
+        for c in classEnrollments:
+            print(c)
+        
+        results = q.deleteClassEnrollment(2, 4)
+        print("Deleting ClassEnrollment")
+        print("Rows Updated: ", results)
+
+        classEnrollments = q.getAllClassEnrollments()
+        print("Updated ClassEnrollments: ")
+        print(cursor.column_names)
+        for c in classEnrollments:
+            print(c)
 
 
     except Exception as e:
