@@ -89,6 +89,7 @@ To support growth, Swole Society needs a database-driven system to manage member
     ('Evening Mobility', 'Bob')
     ('Morning Mobility', 'Ted')
     ('Morning Olympic Lifting', 'Bob')
+    ('Morning Olympic Lifting', 'Michelle')
     Adding Class Enrollment
     Rows Inserted:  1
     Updated ClassEnrollments: 
@@ -97,6 +98,7 @@ To support growth, Swole Society needs a database-driven system to manage member
     ('Morning Mobility', 'Ralph')
     ('Morning Mobility', 'Ted')
     ('Morning Olympic Lifting', 'Bob')
+    ('Morning Olympic Lifting', 'Michelle')
     Updating Class Enrollment class_id
     Rows Updated:  1
     Updated ClassEnrollments: 
@@ -105,6 +107,7 @@ To support growth, Swole Society needs a database-driven system to manage member
     ('Evening Mobility', 'Ralph')
     ('Morning Mobility', 'Ted')
     ('Morning Olympic Lifting', 'Bob')
+    ('Morning Olympic Lifting', 'Michelle')
     Deleting ClassEnrollment
     Rows Updated:  1
     Updated ClassEnrollments: 
@@ -112,6 +115,7 @@ To support growth, Swole Society needs a database-driven system to manage member
     ('Evening Mobility', 'Bob')
     ('Morning Mobility', 'Ted')
     ('Morning Olympic Lifting', 'Bob')
+    ('Morning Olympic Lifting', 'Michelle')
 
 
 ## Acknowledgements and Originality 

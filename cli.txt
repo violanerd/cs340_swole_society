@@ -29,6 +29,7 @@ All ClassEnrollments:
 ('Evening Mobility', 'Bob')
 ('Morning Mobility', 'Ted')
 ('Morning Olympic Lifting', 'Bob')
+('Morning Olympic Lifting', 'Michelle')
 Adding Class Enrollment
 Rows Inserted:  1
 Updated ClassEnrollments: 
@@ -37,6 +38,7 @@ Updated ClassEnrollments:
 ('Morning Mobility', 'Ralph')
 ('Morning Mobility', 'Ted')
 ('Morning Olympic Lifting', 'Bob')
+('Morning Olympic Lifting', 'Michelle')
 Updating Class Enrollment class_id
 Rows Updated:  1
 Updated ClassEnrollments: 
@@ -45,6 +47,7 @@ Updated ClassEnrollments:
 ('Evening Mobility', 'Ralph')
 ('Morning Mobility', 'Ted')
 ('Morning Olympic Lifting', 'Bob')
+('Morning Olympic Lifting', 'Michelle')
 Deleting ClassEnrollment
 Rows Updated:  1
 Updated ClassEnrollments: 
@@ -52,3 +55,4 @@ Updated ClassEnrollments:
 ('Evening Mobility', 'Bob')
 ('Morning Mobility', 'Ted')
 ('Morning Olympic Lifting', 'Bob')
+('Morning Olympic Lifting', 'Michelle')
