@@ -53,6 +53,7 @@ CREATE TABLE Coaches (
   coach_id int NOT NULL AUTO_INCREMENT,
   member_id int NOT NULL,
   PRIMARY KEY (coach_id),
+  UNIQUE (member_id),
   KEY fk_Coaches_Members1_idx (member_id),
   CONSTRAINT fk_Coaches_Members1 FOREIGN KEY (member_id) REFERENCES Members (member_id)
   ON DELETE CASCADE
