@@ -18,28 +18,28 @@ To support growth, Swole Society needs a database-driven system to manage member
 ## Setup
 
 ### Installation/Dependency Requirements
-MySql 8+
-Python 3
-mysql-connector-python==26.10.0
-Data definition language with inserts in DDL.sql must be imported into a local database
+- MySql 8+
+- Python 3
+- mysql-connector-python
+- Data definition language with inserts in DDL.sql must be imported into a local database
 
 ### Local Setup
-1. Clone Repository
+- Clone Repository or download and unzip files
 
-2. Open new Mysql session ```mysql -u root -p```
+- Open new Mysql session ```mysql -u root -p```
 
-3. Create database 
+- Create database 
     ```Create database swoleSociety;```
-4. Use database 
+- Use database 
     ```Use swoleSociety;```
-5. Import the schema and sample data ```source DDL.sql```
+- Import the schema and sample data ```source DDL.sql```
 
 ### Create Python venv and install requirements, instructions for MacOS 
-1. From home directory, create python virtual environment 
+- From home directory, create python virtual environment 
 ```python3 -m venv venv```
-2. Activate venv from home directory
+- Activate venv from home directory
 ```source venv/bin/activate```
-3. Install requirements
+- Install requirements
 ```pip3 install -r requirements.txt```
 
 ### Replace database configurations in test_app.py with your MySql credentials  
@@ -54,7 +54,8 @@ Data definition language with inserts in DDL.sql must be imported into a local d
 
 ### Run the application
 
-1. From home directory ```python3 src/test_app.py```
+- If cloned: From home directory ```python3 src/test_app.py```
+- If unzipped run test_app.py ```python3 test_app.py```
 
 ## Expected Output
     All ClassTypes: 
@@ -124,6 +125,11 @@ https://canvas.oregonstate.edu/courses/2061186/assignments/10623045
 #### Citation for use of AI Tools, datetime formatting in function getAllClasses:
 Date 11/3/2026 
 Prompts used to generate SQL: Make this more user friendly
+Microsoft. (November 2026). Microsoft Copilot [large language model]. https://copilot.microsoft.com
+
+#### Citation for use of AI Tools, description:
+Date 11/3/2026 
+Prompts used to generate description: Take description and make it brief. Output in description.
 Microsoft. (November 2026). Microsoft Copilot [large language model]. https://copilot.microsoft.com
 
 #### Citation for use of AI Tools, cursor error:
