@@ -151,7 +151,7 @@ VALUES
     'CA',
     '94115',
     '4151234567',
-    2
+    (select membership_type_id from MembershipTypes where membership_name='Plus')
 ),
 (
     'ted@swolesociety.com',
@@ -163,7 +163,7 @@ VALUES
     'CA',
     '94201',
     '4155555555',
-    3
+    (select membership_type_id from MembershipTypes where membership_name='Unlimited')
 ),
 (
     'bob@swolesociety.com',
@@ -175,7 +175,7 @@ VALUES
     'CA',
     '94201',
     '5555555555',
-    1
+    (select membership_type_id from MembershipTypes where membership_name='Basic')
 ),
 (
     'ralph@abc.com',
@@ -187,7 +187,7 @@ VALUES
     'CA',
     '94201',
     '6555555555',
-    1
+    (select membership_type_id from MembershipTypes where membership_name='Basic')
 );
 
 
@@ -197,13 +197,13 @@ INSERT INTO Coaches
 )
 VALUES
 (
-    1
+    (select member_id from Members where member_email = 'michelletantan@gmail.com')
 ),
 (
-    2
+    (select member_id from Members where member_email = 'ted@swolesociety.com')
 ),
 (
-    3
+    (select member_id from Members where member_email = 'bob@swolesociety.com')
 );
 
 INSERT INTO Classes 
@@ -221,24 +221,27 @@ VALUES
     60,
     5,
     '2026-12-01 09:00:00',
-    3,
-    1
+    (select class_type_id from ClassTypes where class_type_name = "Mobility"),
+    (select coach_id from Coaches join Members on Coaches.member_id = Members.member_id
+      where Members.member_email = 'michelletantan@gmail.com')
 ), 
 (
 	'Evening Mobility',
     60,
     5,
     '2026-12-01 18:00:00',
-    3,
-    1
+    (select class_type_id from ClassTypes where class_type_name = "Mobility"),
+    (select coach_id from Coaches join Members on Coaches.member_id = Members.member_id
+      where Members.member_email = 'michelletantan@gmail.com')
 ),
 (
 	'Morning Olympic Lifting',
     60,
     5,
     '2026-12-02 09:00:00',
-    2,
-    2
+    (select class_type_id from ClassTypes where class_type_name = "Olympic Lifting"),
+    (select coach_id from Coaches join Members on Coaches.member_id = Members.member_id
+      where Members.member_email = 'ted@swolesociety.com')
 );
 
 INSERT INTO ClassEnrollments
@@ -248,20 +251,20 @@ INSERT INTO ClassEnrollments
 )
 VALUES
 (
-  1,
-  2
+  (select class_id from Classes where class_name = 'Morning Mobility'),
+  (select member_id from Members where member_email = 'ted@swolesociety.com')
 ),
 (
-  2,
-  3
+  (select class_id from Classes where class_name = 'Evening Mobility'),
+  (select member_id from Members where member_email = 'bob@swolesociety.com')
 ),
 (
-  3,
-  1
+  (select class_id from Classes where class_name = 'Morning Olympic Lifting'),
+  (select member_id from Members where member_email = 'michelletantan@gmail.com')
 ),
 (
-  3,
-  3
+  (select class_id from Classes where class_name = 'Morning Olympic Lifting'),
+  (select member_id from Members where member_email = 'bob@swolesociety.com')
 );
 
 SET FOREIGN_KEY_CHECKS=1;

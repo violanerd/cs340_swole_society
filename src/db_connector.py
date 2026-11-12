@@ -78,7 +78,7 @@ class SwoleSociety:
         All ClassEnrollments
         """
         sql = """
-        SELECT Classes.class_name, Members.member_first_name from ClassEnrollments
+        SELECT ClassEnrollments.class_enrollment_id, Classes.class_name, Members.member_first_name from ClassEnrollments
         INNER JOIN Members on Members.member_id = ClassEnrollments.member_id
         INNER JOIN Classes on Classes.class_id = ClassEnrollments.class_id
         ORDER BY Classes.class_name, Members.member_first_name
@@ -97,7 +97,7 @@ class SwoleSociety:
         VALUES (%s, %s)
         """
         self.cursor.execute(sql, (class_id, member_id))
-        self.connection.commit()
+        self._commit()
         rowcount = self.cursor.rowcount
         return rowcount
 
@@ -112,21 +112,21 @@ class SwoleSociety:
         AND member_id = %s
         """
         self.cursor.execute(sql, (class_id, old_class_id, member_id))
-        self.connection.commit()
+        self._commit()
         rowcount = self.cursor.rowcount
         return rowcount
 
     def deleteClassEnrollment(self, class_id, member_id):
         """
-        Delete class Enrollment by member and class id
+        Delete ClassEnrollment by member and class id
         """
         sql = """
-        DELETE FROM classEnrollments WHERE 
+        DELETE FROM ClassEnrollments WHERE 
         class_id=%s
         AND member_id = %s
         """
         self.cursor.execute(sql, (class_id, member_id))
-        self.connection.commit()
+        self._commit()
         rowcount = self.cursor.rowcount
         return rowcount
 
