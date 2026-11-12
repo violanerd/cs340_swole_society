@@ -45,6 +45,6 @@ UPDATE ClassEnrollments
         AND member_id = :member_id_input;
 
 -- Deletes ClassEnrollment for member_id and class_id
-DELETE FROM classEnrollments WHERE 
+DELETE FROM ClassEnrollments WHERE 
         class_id = :class_id_input
         AND member_id = :member_id_input;
