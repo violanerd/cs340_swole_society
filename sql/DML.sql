@@ -16,13 +16,13 @@ SELECT class_type_id, class_type_name from ClassTypes;
 SELECT membership_type_id, membership_name, attendance_limit from MembershipTypes;
 
 -- All ClassEnrollments
-SELECT ClassEnrollments.class_enrollment_id, Classes.class_name, Members.member_first_name from ClassEnrollments
+SELECT ClassEnrollments.class_enrollment_id, Classes.class_name, Members.member_first_name, Members.member_last_name from ClassEnrollments
         INNER JOIN Members on Members.member_id = ClassEnrollments.member_id
         INNER JOIN Classes on Classes.class_id = ClassEnrollments.class_id
         ORDER BY Classes.class_name, Members.member_first_name;
 
 -- Gets all Classes with ClassType and Coach
-SELECT class_id, class_name, class_type_name, member_first_name as coach_name, class_duration_min, class_max_capacity, 
+SELECT class_id, class_name, class_type_name, member_first_name as coach_first_name, member_last_name as coach_last_name, class_duration_min, class_max_capacity, 
         DATE_FORMAT(class_date_time, '%Y-%m-%d %h:%i %p') AS class_date_time
         FROM Classes
         INNER JOIN Coaches on Coaches.coach_id = Classes.coach_id
