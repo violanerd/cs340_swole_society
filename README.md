@@ -96,7 +96,7 @@ To support growth, Swole Society needs a database-driven system to manage member
     ('class_enrollment_id', 'class_name', 'member_name')
     (2, 'Evening Mobility', 'Bob Saget')
     (1, 'Morning Mobility', 'Ted Mosby')
-    (7, 'Morning Mobility', 'Ralph Waldo')
+    (5, 'Morning Mobility', 'Ralph Waldo')
     (4, 'Morning Olympic Lifting', 'Bob Saget')
     (3, 'Morning Olympic Lifting', 'Michelle Tanner')
     Updating Class Enrollment class_id
@@ -104,7 +104,7 @@ To support growth, Swole Society needs a database-driven system to manage member
     Updated ClassEnrollments: 
     ('class_enrollment_id', 'class_name', 'member_name')
     (2, 'Evening Mobility', 'Bob Saget')
-    (7, 'Evening Mobility', 'Ralph Waldo')
+    (5, 'Evening Mobility', 'Ralph Waldo')
     (1, 'Morning Mobility', 'Ted Mosby')
     (4, 'Morning Olympic Lifting', 'Bob Saget')
     (3, 'Morning Olympic Lifting', 'Michelle Tanner')
