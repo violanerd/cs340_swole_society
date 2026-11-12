@@ -61,61 +61,61 @@ To support growth, Swole Society needs a database-driven system to manage member
     All ClassTypes: 
     ('class_type_id', 'class_type_name')
     (1, 'HIIT')
-    (2, 'Olympic Lifting')
     (3, 'Mobility')
+    (2, 'Olympic Lifting')
     All MembershipTypes: 
     ('membership_type_id', 'membership_name', 'attendance_limit')
     (1, 'Basic', 2)
     (2, 'Plus', 4)
     (3, 'Unlimited', -1)
     All members in the database with MembershipType: 
-    ('member_id', 'member_first_name', 'member_last_name', 'membership_name')
-    (3, 'Bob', 'Saget', 'Basic')
-    (4, 'Ralph', 'Waldo', 'Basic')
-    (1, 'Michelle', 'Tanner', 'Plus')
-    (2, 'Ted', 'Mosby', 'Unlimited')
+    ('member_id', 'member_name', 'membership_name')
+    (3, 'Bob Saget', 'Basic')
+    (1, 'Michelle Tanner', 'Plus')
+    (4, 'Ralph Waldo', 'Basic')
+    (2, 'Ted Mosby', 'Unlimited')
     All coaches in the database: 
-    ('coach_id', 'coach_first_name', 'coach_last_name')
-    (1, 'Michelle', 'Tanner')
-    (2, 'Ted', 'Mosby')
-    (3, 'Bob', 'Saget')
+    ('coach_id', 'coach_name')
+    (3, 'Bob Saget')
+    (1, 'Michelle Tanner')
+    (2, 'Ted Mosby')
     All Classes in the database with ClassType and Coach: 
     ('class_id', 'class_name', 'class_type_name', 'coach_name', 'class_duration_min', 'class_max_capacity', 'class_date_time')
-    (1, 'Morning Mobility', 'Mobility', 'Michelle', 60, 5, '2026-12-01 09:00 AM')
-    (2, 'Evening Mobility', 'Mobility', 'Michelle', 60, 5, '2026-12-01 06:00 PM')
-    (3, 'Morning Olympic Lifting', 'Olympic Lifting', 'Ted', 60, 5, '2026-12-02 09:00 AM')
+    (1, 'Morning Mobility', 'Mobility', 'Michelle Tanner', 60, 5, '2026-12-01 09:00 AM')
+    (2, 'Evening Mobility', 'Mobility', 'Michelle Tanner', 60, 5, '2026-12-01 06:00 PM')
+    (3, 'Morning Olympic Lifting', 'Olympic Lifting', 'Ted Mosby', 60, 5, '2026-12-02 09:00 AM')
     All ClassEnrollments: 
-    ('class_name', 'member_first_name')
-    ('Evening Mobility', 'Bob')
-    ('Morning Mobility', 'Ted')
-    ('Morning Olympic Lifting', 'Bob')
-    ('Morning Olympic Lifting', 'Michelle')
+    ('class_enrollment_id', 'class_name', 'member_name')
+    (2, 'Evening Mobility', 'Bob Saget')
+    (1, 'Morning Mobility', 'Ted Mosby')
+    (4, 'Morning Olympic Lifting', 'Bob Saget')
+    (3, 'Morning Olympic Lifting', 'Michelle Tanner')
     Adding Class Enrollment
     Rows Inserted:  1
     Updated ClassEnrollments: 
-    ('class_name', 'member_first_name')
-    ('Evening Mobility', 'Bob')
-    ('Morning Mobility', 'Ralph')
-    ('Morning Mobility', 'Ted')
-    ('Morning Olympic Lifting', 'Bob')
-    ('Morning Olympic Lifting', 'Michelle')
+    ('class_enrollment_id', 'class_name', 'member_name')
+    (2, 'Evening Mobility', 'Bob Saget')
+    (6, 'Morning Mobility', 'Ralph Waldo')
+    (1, 'Morning Mobility', 'Ted Mosby')
+    (4, 'Morning Olympic Lifting', 'Bob Saget')
+    (3, 'Morning Olympic Lifting', 'Michelle Tanner')
     Updating Class Enrollment class_id
     Rows Updated:  1
     Updated ClassEnrollments: 
-    ('class_name', 'member_first_name')
-    ('Evening Mobility', 'Bob')
-    ('Evening Mobility', 'Ralph')
-    ('Morning Mobility', 'Ted')
-    ('Morning Olympic Lifting', 'Bob')
-    ('Morning Olympic Lifting', 'Michelle')
+    ('class_enrollment_id', 'class_name', 'member_name')
+    (2, 'Evening Mobility', 'Bob Saget')
+    (6, 'Evening Mobility', 'Ralph Waldo')
+    (1, 'Morning Mobility', 'Ted Mosby')
+    (4, 'Morning Olympic Lifting', 'Bob Saget')
+    (3, 'Morning Olympic Lifting', 'Michelle Tanner')
     Deleting ClassEnrollment
     Rows Updated:  1
     Updated ClassEnrollments: 
-    ('class_name', 'member_first_name')
-    ('Evening Mobility', 'Bob')
-    ('Morning Mobility', 'Ted')
-    ('Morning Olympic Lifting', 'Bob')
-    ('Morning Olympic Lifting', 'Michelle')
+    ('class_enrollment_id', 'class_name', 'member_name')
+    (2, 'Evening Mobility', 'Bob Saget')
+    (1, 'Morning Mobility', 'Ted Mosby')
+    (4, 'Morning Olympic Lifting', 'Bob Saget')
+    (3, 'Morning Olympic Lifting', 'Michelle Tanner')
 
 
 ## Acknowledgements and Originality 
