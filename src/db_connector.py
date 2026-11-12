@@ -17,7 +17,7 @@ class SwoleSociety:
         sql = """
         SELECT member_id, CONCAT(member_first_name, ' ', member_last_name) AS member_name, membership_name from Members
         INNER JOIN MembershipTypes on MembershipTypes.membership_type_id = Members.membership_type_id
-        ORDER BY member_name
+        ORDER BY member_last_name, member_first_name
         """
         self.cursor.execute(sql)
         results = self.cursor.fetchall()
@@ -31,7 +31,7 @@ class SwoleSociety:
         SELECT coach_id, CONCAT(member_first_name, ' ', member_last_name) AS coach_name
         from Members
         INNER JOIN Coaches on Coaches.member_id = Members.member_id
-        ORDER BY coach_name
+        ORDER BY member_last_name, member_first_name
         """
         self.cursor.execute(sql)
         results = self.cursor.fetchall()
@@ -86,7 +86,7 @@ class SwoleSociety:
         SELECT ClassEnrollments.class_enrollment_id, Classes.class_name, CONCAT(member_first_name, ' ', member_last_name) AS member_name from ClassEnrollments
         INNER JOIN Members on Members.member_id = ClassEnrollments.member_id
         INNER JOIN Classes on Classes.class_id = ClassEnrollments.class_id
-        ORDER BY Classes.class_name, member_name
+        ORDER BY Classes.class_name, member_last_name, member_first_name
         """
         self.cursor.execute(sql)
         results = self.cursor.fetchall()

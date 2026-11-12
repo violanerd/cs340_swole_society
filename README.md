@@ -70,15 +70,15 @@ To support growth, Swole Society needs a database-driven system to manage member
     (3, 'Unlimited', -1)
     All members in the database with MembershipType: 
     ('member_id', 'member_name', 'membership_name')
+    (2, 'Ted Mosby', 'Unlimited')
     (3, 'Bob Saget', 'Basic')
     (1, 'Michelle Tanner', 'Plus')
     (4, 'Ralph Waldo', 'Basic')
-    (2, 'Ted Mosby', 'Unlimited')
     All coaches in the database: 
     ('coach_id', 'coach_name')
+    (2, 'Ted Mosby')
     (3, 'Bob Saget')
     (1, 'Michelle Tanner')
-    (2, 'Ted Mosby')
     All Classes in the database with ClassType and Coach: 
     ('class_id', 'class_name', 'class_type_name', 'coach_name', 'class_duration_min', 'class_max_capacity', 'class_date_time')
     (1, 'Morning Mobility', 'Mobility', 'Michelle Tanner', 60, 5, '2026-12-01 09:00 AM')
@@ -95,8 +95,8 @@ To support growth, Swole Society needs a database-driven system to manage member
     Updated ClassEnrollments: 
     ('class_enrollment_id', 'class_name', 'member_name')
     (2, 'Evening Mobility', 'Bob Saget')
-    (6, 'Morning Mobility', 'Ralph Waldo')
     (1, 'Morning Mobility', 'Ted Mosby')
+    (7, 'Morning Mobility', 'Ralph Waldo')
     (4, 'Morning Olympic Lifting', 'Bob Saget')
     (3, 'Morning Olympic Lifting', 'Michelle Tanner')
     Updating Class Enrollment class_id
@@ -104,7 +104,7 @@ To support growth, Swole Society needs a database-driven system to manage member
     Updated ClassEnrollments: 
     ('class_enrollment_id', 'class_name', 'member_name')
     (2, 'Evening Mobility', 'Bob Saget')
-    (6, 'Evening Mobility', 'Ralph Waldo')
+    (7, 'Evening Mobility', 'Ralph Waldo')
     (1, 'Morning Mobility', 'Ted Mosby')
     (4, 'Morning Olympic Lifting', 'Bob Saget')
     (3, 'Morning Olympic Lifting', 'Michelle Tanner')
