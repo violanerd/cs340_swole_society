@@ -2,10 +2,10 @@
 -- Schema swolesociety
 -- Project Group 8 Members: Gabrielle Abdon, Madalyne Cross
 -- -----------------------------------------------------
-DROP PROCEDURE IF EXISTS sp_ResetDatabase;
+DROP PROCEDURE IF EXISTS sp_reset_db;
 
 DELIMITER //
-CREATE PROCEDURE sp_ResetDatabase()
+CREATE PROCEDURE sp_reset_db()
 BEGIN
 
   SET FOREIGN_KEY_CHECKS=0;
