@@ -1,12 +1,10 @@
--- Variables prefixed with : and postfixed with input are values from the Python application.
-
-
+-- Active: 1790317343502@@127.0.0.1@3306@swolesocietytest
 -- CreateClassEnrollment PL/SQL
 -- Adds ClassEnrollment
-DROP PROCEDURE IF EXISTS sp_create_class_enrollment;
+DROP PROCEDURE IF EXISTS sp_add_class_enrollment;
 
 DELIMITER //
-CREATE PROCEDURE sp_create_class_enrollment(
+CREATE PROCEDURE sp_add_class_enrollment(
         IN p_class_id int,
         IN p_member_id int,
         OUT p_class_enrollment_id int
@@ -30,6 +28,19 @@ CREATE PROCEDURE sp_update_class_enrollment(
         IN p_new_class_id int
 )
 BEGIN
+        -- Make sure the enrollment being changed exists
+        IF NOT EXISTS (SELECT 1 FROM ClassEnrollments
+                WHERE member_id = p_member_id AND class_id = p_old_class_id) 
+                THEN SIGNAL SQLSTATE '45000'
+                SET MESSAGE_TEXT = 'No enrollment found for that member_id and old_class_id';
+        END IF;
+
+        -- Make sure the new class exists
+        IF NOT EXISTS (SELECT 1 FROM Classes WHERE class_id = p_new_class_id) 
+                THEN SIGNAL SQLSTATE '45000'
+                SET MESSAGE_TEXT = 'new_class_id does not exist in Classes';
+        END IF;
+
         UPDATE ClassEnrollments 
         SET class_id = p_new_class_id
         WHERE class_id = p_old_class_id
@@ -65,8 +76,8 @@ BEGIN
                 SET v_rows_deleted = ROW_COUNT();
 
                 IF v_rows_deleted = 0 THEN
-                        SET error_message = CONCAT('No matching record found in ClassEnrollments for 
-                                member_id ' , p_member_id, ' in class_id ', p_class_id);
+                        SET error_message = CONCAT('No matching record found in ClassEnrollments for member_id ' , 
+                        p_member_id, ' in class_id ', p_class_id);
 
                         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = error_message;
                 END IF;
