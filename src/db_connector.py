@@ -97,7 +97,7 @@ class SwoleSociety:
         """
         Add ClassEnrollment
         """
-        sql = "CALL sp_create_class_enrollment(%s, %s)"
+        sql = "CALL sp_add_class_enrollment(%s, %s, @new_id)"
         self.cursor.execute(sql, (class_id, member_id))
         while self.cursor.nextset():
             pass
@@ -106,20 +106,18 @@ class SwoleSociety:
         new_id = self.cursor.fetchone()[0]
 
         self._commit()
-        self.cursor.close()
-        return 1 if new_id else 0
+        return new_id
         # rowcount = self.cursor.rowcount
         # return rowcount
 
-    def updateClassEnrollment(self, class_id, old_class_id, member_id):
+    def updateClassEnrollment(self, member_id, old_class_id, new_class_id):
         """
-        Update ClassEnrollment with new class_id
+        Move a member's enrollment from old_class_id to new_class_id
         """
         sql = "CALL sp_update_class_enrollment(%s, %s, %s)"
-        self.cursor.execute(sql, (class_id, old_class_id, new_class_id))
+        self.cursor.execute(sql, (member_id, old_class_id, new_class_id))
         rowcount = self.cursor.rowcount
         self._commit()
-        self.cursor.close()
         return rowcount
 
     def deleteClassEnrollment(self, class_id, member_id):
@@ -130,7 +128,6 @@ class SwoleSociety:
         self.cursor.execute(sql, (class_id, member_id))
         rowcount = self.cursor.rowcount
         self._commit()
-        self.cursor.close()
         return rowcount
 
     def resetDatabase(self):
@@ -143,7 +140,6 @@ class SwoleSociety:
         # The reset procedure issues DDL (DROP/CREATE) and DML (INSERT) statements.
         # Commit ensures all DML changes persisted.
         self._commit()
-        self.cursor.close()
         # Return 1 to signal success; the reset either completes fully or raises an exception.
         return 1
 
