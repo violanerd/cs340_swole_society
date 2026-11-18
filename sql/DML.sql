@@ -35,16 +35,22 @@ SELECT class_id, class_name, class_type_name, CONCAT(member_first_name, ' ', mem
         ORDER BY Classes.class_date_time;
 
 -- Adds ClassEnrollment
-INSERT INTO ClassEnrollments (class_id, member_id)
-        VALUES (:class_id_input, :member_id_input);
+-- INSERT INTO ClassEnrollments (class_id, member_id)
+--         VALUES (:class_id_input, :member_id_input);
+CALL sp_add_class_enrollment(%s, %s);
 
 -- Updates ClassEnrollment class_id taking in class_id and old_class_id and member_id
-UPDATE ClassEnrollments 
-        SET class_id = :class_id_input
-        WHERE class_id = :old_class_id_input
-        AND member_id = :member_id_input;
+-- UPDATE ClassEnrollments 
+--         SET class_id = :class_id_input
+--         WHERE class_id = :old_class_id_input
+--         AND member_id = :member_id_input;
+CALL sp_update_class_enrollment(%s, %s, %s);
 
 -- Deletes ClassEnrollment for member_id and class_id
-DELETE FROM ClassEnrollments WHERE 
-        class_id = :class_id_input
-        AND member_id = :member_id_input;
+-- DELETE FROM ClassEnrollments WHERE 
+--         class_id = :class_id_input
+--         AND member_id = :member_id_input;
+CALL sp_delete_class_enrollment(%s, %s);
+
+-- Resets database
+CALL sp_reset_db();

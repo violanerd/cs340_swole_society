@@ -32,7 +32,9 @@ To support growth, Swole Society needs a database-driven system to manage member
     ```Create database swoleSociety;```
 - Use database 
     ```Use swoleSociety;```
-- Import the schema and sample data ```source DDL.sql```
+- Import reset stored procedure ```source sql/DDL.sql```
+- Import add/update/delete stored procedures ```source sql/plsql.sql```
+
 
 ### Create Python venv and install requirements, instructions for MacOS 
 - From home directory, create python virtual environment 
@@ -58,7 +60,8 @@ To support growth, Swole Society needs a database-driven system to manage member
 - If unzipped run test_app.py ```python3 test_app.py```
 
 ## Expected Output
-    All ClassTypes: 
+    Database reset to sample data before tests.
+    `All ClassTypes: 
     ('class_type_id', 'class_type_name')
     (1, 'HIIT')
     (3, 'Mobility')
@@ -91,7 +94,6 @@ To support growth, Swole Society needs a database-driven system to manage member
     (4, 'Morning Olympic Lifting', 'Bob Saget')
     (3, 'Morning Olympic Lifting', 'Michelle Tanner')
     Adding Class Enrollment
-    Rows Inserted:  1
     Updated ClassEnrollments: 
     ('class_enrollment_id', 'class_name', 'member_name')
     (2, 'Evening Mobility', 'Bob Saget')
@@ -99,8 +101,7 @@ To support growth, Swole Society needs a database-driven system to manage member
     (5, 'Morning Mobility', 'Ralph Waldo')
     (4, 'Morning Olympic Lifting', 'Bob Saget')
     (3, 'Morning Olympic Lifting', 'Michelle Tanner')
-    Updating Class Enrollment class_id
-    Rows Updated:  1
+    Update successful: member 4 moved from class 1 to class 2
     Updated ClassEnrollments: 
     ('class_enrollment_id', 'class_name', 'member_name')
     (2, 'Evening Mobility', 'Bob Saget')
@@ -108,9 +109,23 @@ To support growth, Swole Society needs a database-driven system to manage member
     (1, 'Morning Mobility', 'Ted Mosby')
     (4, 'Morning Olympic Lifting', 'Bob Saget')
     (3, 'Morning Olympic Lifting', 'Michelle Tanner')
-    Deleting ClassEnrollment
-    Rows Updated:  1
+    Expected error (bad new_class_id): 1644 (45000): new_class_id does not exist in Classes
+    Expected error (no matching enrollment): 1644 (45000): No enrollment found for that member_id and old_class_id
+    Delete successful: member 4 removed from class 2
     Updated ClassEnrollments: 
+    ('class_enrollment_id', 'class_name', 'member_name')
+    (2, 'Evening Mobility', 'Bob Saget')
+    (1, 'Morning Mobility', 'Ted Mosby')
+    (4, 'Morning Olympic Lifting', 'Bob Saget')
+    (3, 'Morning Olympic Lifting', 'Michelle Tanner')
+    Class Enrollments BEFORE reset: 
+    (2, 'Evening Mobility', 'Bob Saget')
+    (1, 'Morning Mobility', 'Ted Mosby')
+    (4, 'Morning Olympic Lifting', 'Bob Saget')
+    (3, 'Morning Olympic Lifting', 'Michelle Tanner')
+    (6, 'Morning Olympic Lifting', 'Ralph Waldo')
+    Database reset. ClassEnrollments should return to the 4 sample rows: 
+    All ClassEnrollments: 
     ('class_enrollment_id', 'class_name', 'member_name')
     (2, 'Evening Mobility', 'Bob Saget')
     (1, 'Morning Mobility', 'Ted Mosby')

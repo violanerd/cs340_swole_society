@@ -97,41 +97,50 @@ class SwoleSociety:
         """
         Add ClassEnrollment
         """
-        sql = """
-        INSERT INTO ClassEnrollments (class_id, member_id)
-        VALUES (%s, %s)
-        """
+        sql = "CALL sp_add_class_enrollment(%s, %s, @new_id)"
         self.cursor.execute(sql, (class_id, member_id))
-        self._commit()
-        rowcount = self.cursor.rowcount
-        return rowcount
+        while self.cursor.nextset():
+            pass
 
-    def updateClassEnrollment(self, class_id, old_class_id, member_id):
-        """
-        Update ClassEnrollment with new class_id
-        """
-        sql = """
-        UPDATE ClassEnrollments 
-        SET class_id = %s
-        WHERE class_id = %s
-        AND member_id = %s
-        """
-        self.cursor.execute(sql, (class_id, old_class_id, member_id))
+        self.cursor.execute("SELECT @new_id")
+        new_id = self.cursor.fetchone()[0]
+
         self._commit()
+        return new_id
+        # rowcount = self.cursor.rowcount
+        # return rowcount
+
+    def updateClassEnrollment(self, member_id, old_class_id, new_class_id):
+        """
+        Move a member's enrollment from old_class_id to new_class_id
+        """
+        sql = "CALL sp_update_class_enrollment(%s, %s, %s)"
+        self.cursor.execute(sql, (member_id, old_class_id, new_class_id))
         rowcount = self.cursor.rowcount
+        self._commit()
         return rowcount
 
     def deleteClassEnrollment(self, class_id, member_id):
         """
         Delete ClassEnrollment by member and class id
         """
-        sql = """
-        DELETE FROM ClassEnrollments WHERE 
-        class_id=%s
-        AND member_id = %s
-        """
+        sql = 'CALL sp_delete_class_enrollment(%s, %s)'
         self.cursor.execute(sql, (class_id, member_id))
-        self._commit()
         rowcount = self.cursor.rowcount
+        self._commit()
         return rowcount
+
+    def resetDatabase(self):
+        sql = 'CALL sp_reset_db()'
+        self.cursor.execute(sql)
+
+        while self.cursor.nextset():
+            pass
+
+        # The reset procedure issues DDL (DROP/CREATE) and DML (INSERT) statements.
+        # Commit ensures all DML changes persisted.
+        self._commit()
+        # Return 1 to signal success; the reset either completes fully or raises an exception.
+        return 1
+
 
