@@ -1,4 +1,3 @@
--- Active: 1790317343502@@127.0.0.1@3306@swolesocietytest
 -- CreateClassEnrollment PL/SQL
 -- Adds ClassEnrollment
 DROP PROCEDURE IF EXISTS sp_add_class_enrollment;
